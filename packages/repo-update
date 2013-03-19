@@ -1,7 +1,7 @@
 #!/bin/bash
 
 arch=$(uname -m)
-repo=../arch-repo/custom/any
+repo=../repo/custom/any
 db=$repo/custom.db.tar.gz
 
 for pkg in `find abs/ -type f -name "*.pkg.tar.xz"`; do
