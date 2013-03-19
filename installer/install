@@ -3,6 +3,9 @@
 yaourt_url=https://aur.archlinux.org/packages/ya/yaourt/PKGBUILD
 package_query_url=https://aur.archlinux.org/packages/pa/package-query/PKGBUILD
 pacman_options="--needed --noconfirm"
+packages_url=http://ahdiaz.euler.es/arch/installer
+packages_install=$packages_url/packages.install
+packages_uninstall=$packages_url/packages.uninstall
 
 aur_install ()
 {
@@ -19,16 +22,13 @@ aur_install ()
 }
 
 sudo pacman -Syy
-
-sudo pacman -Rs $pacman_options $(grep -v "^#" packages.uninstall)
-
-#sudo pacman -S $pacman_options base-devel wget
+sudo pacman -Rs $pacman_options $(curl $packages_uninstall | grep -v "^#")
+sudo pacman -S $pacman_options base-devel wget
 
 #aur_install "package-query" $package_query_url
 #aur_install "yaourt" $yaourt_url
-
 sudo pacman -S $pacman_options yaourt
 
 yaourt -Sy
-yaourt -S $pacman_options $(grep -v "^#" packages.install)
+yaourt -S $pacman_options $(curl $packages_install | grep -v "^#")
 yaourt -Sua $pacman_options
