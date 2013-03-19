@@ -2,6 +2,7 @@
 
 yaourt_url=https://aur.archlinux.org/packages/ya/yaourt/PKGBUILD
 package_query_url=https://aur.archlinux.org/packages/pa/package-query/PKGBUILD
+pacman_options="--needed --noconfirm"
 
 aur_install ()
 {
@@ -19,13 +20,15 @@ aur_install ()
 
 sudo pacman -Syy
 
-sudo pacman -Rs --noconfirm $(grep -v "^#" packages.uninstall)
+sudo pacman -Rs $pacman_options $(grep -v "^#" packages.uninstall)
 
-sudo pacman -S --needed --noconfirm base-devel wget
+#sudo pacman -S $pacman_options base-devel wget
 
-aur_install "package-query" $package_query_url
-aur_install "yaourt" $yaourt_url
+#aur_install "package-query" $package_query_url
+#aur_install "yaourt" $yaourt_url
+
+sudo pacman -S $pacman_options yaourt
 
 yaourt -Sy
-yaourt -S --needed --noconfirm $(grep -v "^#" packages.install)
-yaourt -Sua --noconfirm
+yaourt -S $pacman_options $(grep -v "^#" packages.install)
+yaourt -Sua $pacman_options
