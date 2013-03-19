@@ -1,0 +1,31 @@
+#!/bin/bash
+
+yaourt_url=https://aur.archlinux.org/packages/ya/yaourt/PKGBUILD
+package_query_url=https://aur.archlinux.org/packages/pa/package-query/PKGBUILD
+
+aur_install ()
+{
+    package_name=$1
+    package_url=$2
+    installed=`pacman -Qs $package_name`
+    if [ -z "$installed" ]; then
+        mkdir -p abs/$package_name
+        wget -O abs/$package_name/PKGBUILD $package_url
+        cd abs/$package_name
+        makepkg -csi --noconfirm
+        cd -
+    fi
+}
+
+sudo pacman -Syy
+
+sudo pacman -Rs --noconfirm $(grep -v "^#" packages.uninstall)
+
+sudo pacman -S --needed --noconfirm base-devel wget
+
+aur_install "package-query" $package_query_url
+aur_install "yaourt" $yaourt_url
+
+yaourt -Sy
+yaourt -S --needed --noconfirm $(grep -v "^#" packages.install)
+yaourt -Sua --noconfirm

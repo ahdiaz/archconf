@@ -1,0 +1,43 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Antonio Hernández <ahdiaz@gmail.com>
+pkgname=python-virtualenvwrapper-conf
+pkgver=0.1
+pkgrel=1
+epoch=
+pkgdesc="Bash configuration for virtualenvwrapper"
+arch=('any')
+url=""
+license=('GPL')
+groups=()
+depends=('bash-conf' 'python-virtualenvwrapper')
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=($pkgname-$pkgver.tar.gz)
+noextract=()
+md5sums=('4a06b146d6ca67c8650079d6e9ea7675') #generate with 'makepkg -g'
+
+#build() {
+#  cd "$srcdir/$pkgname-$pkgver"
+#}
+
+#check() {
+#  cd "$srcdir/$pkgname-$pkgver"
+#}
+
+package() {
+  cp -r $srcdir/$pkgname-$pkgver/* "$pkgdir/"
+}
+
+# vim:set ts=2 sw=2 et:

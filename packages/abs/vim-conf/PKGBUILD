@@ -1,0 +1,59 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Antonio Hernández <ahdiaz@gmail.com>
+pkgname=vim-conf
+pkgver=0.1
+pkgrel=1
+epoch=
+pkgdesc="My custom vim configuration"
+arch=('any')
+url="https://github.com/ahdiaz/vimrc"
+license=('GPL')
+groups=()
+depends=('vim')
+makedepends=('git')
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=vim-conf.install
+changelog=
+source=($pkgname-$pkgver.tar.gz)
+noextract=()
+md5sums=('ce6d586021026f5afe2ac48464476cba') #generate with 'makepkg -g'
+
+_git='https://github.com/ahdiaz/vimrc.git'
+
+build() {
+  mkdir "$srcdir/$pkgname-$pkgver-git/"
+  git clone $_git $srcdir/$pkgname-$pkgver-git/
+  cd "$srcdir/$pkgname-$pkgver-git"
+  git submodule init
+  git submodule update
+}
+
+#check() {
+#  cd "$srcdir/$pkgname-$pkgver"
+#}
+
+package() {
+  vimconf="$pkgdir/usr/share/vim-conf/"
+  vimfiles="$pkgdir/usr/share/vim/vimfiles/"
+  vim73="$pkgdir/usr/share/vim/vim73/"
+  autoload="$vim73/autoload"
+  mkdir -p $vimconf
+  mkdir -p $vimfiles
+  mkdir -p $autoload
+  cp $srcdir/$pkgname-$pkgver/* $vimconf/
+  cp $srcdir/$pkgname-$pkgver-git/vimrc "$vimfiles/custom.vim"
+  cp $srcdir/$pkgname-$pkgver-git/vim/autoload/* "$autoload/"
+  cp -r $srcdir/$pkgname-$pkgver-git/vim/bundle "$vim73/"
+}
+
+# vim:set ts=2 sw=2 et:

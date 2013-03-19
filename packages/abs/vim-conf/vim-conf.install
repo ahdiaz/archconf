@@ -1,0 +1,12 @@
+
+## arg 1:  the new package version
+post_install() {
+  patch /etc/vimrc < /usr/share/vim-conf/vimrc-20130317.diff
+}
+
+## arg 1:  the old package version
+pre_remove() {
+  patch -R /etc/vimrc < /usr/share/vim-conf/vimrc-20130317.diff
+}
+
+# vim:set ts=2 sw=2 et:

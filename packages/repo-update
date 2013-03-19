@@ -1,0 +1,13 @@
+#!/bin/bash
+
+arch=$(uname -m)
+repo=../arch-repo/custom/any
+db=$repo/custom.db.tar.gz
+
+for pkg in `find abs/ -type f -name "*.pkg.tar.xz"`; do
+    mv $pkg $repo
+    pkgname=`basename $pkg`
+    repo-add $db $repo/$pkgname
+done
+
+sudo pacman -Sy

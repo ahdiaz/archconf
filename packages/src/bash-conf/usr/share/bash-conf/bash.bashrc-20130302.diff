@@ -1,0 +1,7 @@
+23a24,29
+> 
+> if [ -d /etc/bash.d ]; then
+>   for f in `find /etc/bash.d -type f`; do
+>     source $f
+>   done
+> fi

@@ -1,0 +1,12 @@
+
+## arg 1:  the new package version
+post_install() {
+  patch /etc/bash.bashrc < /usr/share/bash-conf/bash.bashrc-20130302.diff
+}
+
+## arg 1:  the old package version
+pre_remove() {
+  patch -R /etc/bash.bashrc < /usr/share/bash-conf/bash.bashrc-20130302.diff
+}
+
+# vim:set ts=2 sw=2 et:
