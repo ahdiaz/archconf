@@ -21,6 +21,9 @@ aur_install ()
     fi
 }
 
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
+
 sudo pacman -Syy
 sudo pacman -Rs --noconfirm $(curl $packages_uninstall | grep -v "^#")
 sudo pacman -S $pacman_options pacman
