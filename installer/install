@@ -23,6 +23,7 @@ aur_install ()
 
 sudo pacman -Syy
 sudo pacman -Rs --noconfirm $(curl $packages_uninstall | grep -v "^#")
+sudo pacman -S $pacman_options pacman
 sudo pacman -S $pacman_options base-devel wget
 
 #aur_install "package-query" $package_query_url
