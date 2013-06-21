@@ -10,4 +10,4 @@ for pkg in `find ./ -type f -name "*.pkg.tar.xz"`; do
     repo-add $db $repo/$pkgname
 done
 
-sudo pacman -Sy
+#sudo pacman -Sy
