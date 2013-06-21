@@ -1,0 +1,27 @@
+[color]
+    ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    pager = true
+
+[color "branch"]
+    current = yellow reverse
+#    local = yellow
+    remote = green
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[pretty]
+[alias]
+    hist = log --graph --all --date=short --pretty=format:\"[ %h, %ad, %an ]%d - %s\"
+    refname = log --graph --all --simplify-by-decoration --date=short --pretty=format:\"%d - [ %h, %ad, %an ] - %s\"
+    l = log --decorate --date=iso8601
+
+# Find commits from a branch not merged in upstream
+#   git log --no-merges  build-system ^master
+#   git rev-list --no-merges build-system ^master
