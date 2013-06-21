@@ -22,8 +22,8 @@ aur_install ()
     fi
 }
 
-sudo pacman-key --init
-sudo pacman-key --populate archlinux
+#sudo pacman-key --init
+#sudo pacman-key --populate archlinux
 
 sudo pacman -Syy
 sudo pacman -S $pacman_options pacman
@@ -31,7 +31,7 @@ sudo pacman -Rs --noconfirm $(curl $packages_uninstall | grep -v "^#")
 
 #aur_install "package-query" $package_query_url
 #aur_install "yaourt" $yaourt_url
-sudo pacman -S $pacman_options yaourt
+#sudo pacman -S $pacman_options yaourt
 
 #yaourt -Sy
 yaourt -Sua $pacman_options $(curl $packages_install | grep -v "^#")
