@@ -1,0 +1,50 @@
+#!/bin/bash
+
+export PACKAGER="Antonio Hernández <ahdiaz@gmail.com>"
+
+ac_tmpdir=./tmp
+ac_pkgpath=./packages/$1
+
+if [ ! -d "$ac_pkgpath" ]; then
+    echo "No package name specified."
+    exit 1
+fi
+
+if [ ! -f $ac_pkgpath/abs/PKGBUILD ]; then
+    echo "Can't find $ac_pkgpath/abs/PKGBUILD file."
+    exit 1
+fi
+
+
+ac_clean_tmp_dir () {
+    rm -rf $ac_tmpdir
+    mkdir $ac_tmpdir
+}
+
+ac_copy_assets () {
+
+    cp $ac_pkgpath/abs/* $ac_tmpdir
+    source $ac_pkgpath/abs/PKGBUILD
+
+    if [ -d "$ac_pkgpath/src" ]; then
+        local dirname=`basename "$source" .tar.gz`
+        cp -r $ac_pkgpath/src $ac_tmpdir/$dirname
+        cd $ac_tmpdir
+        tar -zcf $source $dirname
+        cd -
+    fi
+}
+
+ac_build () {
+    cd $ac_tmpdir
+    makepkg -g >> PKGBUILD
+    makepkg -c -d
+}
+
+ac_main () {
+    ac_clean_tmp_dir
+    ac_copy_assets
+    ac_build
+}
+
+ac_main

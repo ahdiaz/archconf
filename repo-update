@@ -1,10 +1,10 @@
 #!/bin/bash
 
 arch=$(uname -m)
-repo=../repo/custom/any
+repo=./repo/custom/any
 db=$repo/custom.db.tar.gz
 
-for pkg in `find ./ -type f -name "*.pkg.tar.xz"`; do
+for pkg in `find ./tmp -type f -name "*.pkg.tar.xz"`; do
     mv $pkg $repo
     pkgname=`basename $pkg`
     repo-add $db $repo/$pkgname
