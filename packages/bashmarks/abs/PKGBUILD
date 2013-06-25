@@ -34,6 +34,7 @@ build() {
   wget -O $srcdir/master.zip $_git
   cd "$srcdir/"
   unzip master.zip
+  mkdir -p $srcdir/$pkgname-$pkgver/usr/local/bin/
   cp bashmarks-master/bashmarks.sh $srcdir/$pkgname-$pkgver/usr/local/bin/
   rm -rf bashmarks-master
   rm master.zip
