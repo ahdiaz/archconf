@@ -1,0 +1,48 @@
+#!/bin/bash
+
+tmpdir=./tmp
+pkgpath=$1
+
+if [ ! -d "$pkgpath" ]; then
+    echo "No package name specified."
+    exit 1
+fi
+
+if [ ! -f $pkgpath/abs/PKGBUILD ]; then
+    echo "Can't find $pkgpath/abs/PKGBUILD file."
+    exit 1
+fi
+
+
+clean_tmp_dir () {
+    rm -rf $tmpdir
+    mkdir $tmpdir
+}
+
+copy_assets () {
+
+    cp $pkgpath/abs/* $tmpdir
+    source $pkgpath/abs/PKGBUILD
+
+    if [ -d "$pkgpath/src" ]; then
+        local dirname=`basename "$source" .tar.gz`
+        cp -r $pkgpath/src $tmpdir/$dirname
+        cd $tmpdir
+        tar -zcf $source $dirname
+        cd -
+    fi
+}
+
+build () {
+    cd $tmpdir
+    makepkg -g >> PKGBUILD
+    makepkg -c -d
+}
+
+main () {
+    clean_tmp_dir
+    copy_assets
+    build
+}
+
+main
