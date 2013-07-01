@@ -17,7 +17,7 @@ lsprompt () {
 prompt () {
 
     local color1='\[\033[01;34m\]'
-    local color2='\[\033[01;31m\]'
+    local color2='\[\033[01;32m\]'
     local color3='\[\033[00m\]'
 
     if [[ ${EUID} == 0 ]]; then
