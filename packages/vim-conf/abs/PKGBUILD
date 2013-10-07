@@ -6,7 +6,7 @@
 # Maintainer: Antonio Hernández <ahdiaz@gmail.com>
 pkgname=vim-conf
 pkgver=0.1
-pkgrel=1
+pkgrel=2
 epoch=
 pkgdesc="My custom vim configuration"
 arch=('any')
@@ -45,15 +45,15 @@ build() {
 package() {
   vimconf="$pkgdir/usr/share/vim-conf/"
   vimfiles="$pkgdir/usr/share/vim/vimfiles/"
-  vim73="$pkgdir/usr/share/vim/vim73/"
-  autoload="$vim73/autoload"
+  vimdir="$pkgdir/usr/share/vim/vim74/"
+  autoload="$vimdir/autoload"
   mkdir -p $vimconf
   mkdir -p $vimfiles
   mkdir -p $autoload
   cp $srcdir/$pkgname-$pkgver/* $vimconf/
   cp $srcdir/$pkgname-$pkgver-git/vimrc "$vimfiles/custom.vim"
   cp $srcdir/$pkgname-$pkgver-git/vim/autoload/* "$autoload/"
-  cp -r $srcdir/$pkgname-$pkgver-git/vim/bundle "$vim73/"
+  cp -r $srcdir/$pkgname-$pkgver-git/vim/bundle "$vimdir/"
 }
 
 # vim:set ts=2 sw=2 et:
