@@ -5,8 +5,8 @@
 
 # Maintainer: Antonio Hernández <ahdiaz@gmail.com>
 pkgname=vim-conf
-pkgver=0.1
-pkgrel=2
+pkgver=0.2
+pkgrel=1
 epoch=
 pkgdesc="My custom vim configuration"
 arch=('any')
