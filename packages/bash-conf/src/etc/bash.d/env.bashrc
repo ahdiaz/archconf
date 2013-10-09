@@ -7,4 +7,4 @@ export SRC=/common/src
 #export GLADE_CATALOG_SEARCH_PATH=/common/src
 
 export MYSQL_PS1="(\d)\n[\U]> "
-export EDITOR="vim"
+export EDITOR=vim
