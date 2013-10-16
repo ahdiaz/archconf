@@ -20,8 +20,16 @@
 [alias]
     hist = log --graph --all --date=short --pretty=format:\"[ %h, %ad, %an ]%d - %s\"
     refname = log --graph --all --simplify-by-decoration --date=short --pretty=format:\"%d - [ %h, %ad, %an ] - %s\"
-    l = log --decorate --date=iso8601
+    l = log --name-status --decorate --date=iso8601
+    my = !sh -c 'git log --pretty=format:\"%ad - %Cgreen%H%Creset - %s\" --author=\"__MY_USER__\" --date=iso8601 --since=\"$@\"' -
+    stats = !git log --pretty=format:%an | sort | uniq --count | sort -g -r
 
 # Find commits from a branch not merged in upstream
 #   git log --no-merges  build-system ^master
 #   git rev-list --no-merges build-system ^master
+#
+# Find commits not merged upstream
+#   git cherry -v master
+#
+# Unstashing changes
+#   git stash show -p stash@{0} | git apply -R
